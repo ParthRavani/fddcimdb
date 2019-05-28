@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+
+      <form class="" novalidate method="POST" action="">
+        <div class="input-group mb-4">
+              {% if form.keyword.errors %}
+                {{ form.keyword(class="form-control is-invalid", placeholder="Type a movie name, production house, genre, release year etc...") }}
+                <div class="invalid-feedback">
+                    {% for error in form.keyword.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+              {% else %}
+                  {{ form.keyword(class="form-control", placeholder="Type a movie name, production house, genre, release year etc...") }}
+              {% endif %}
+          <div class="input-group-append">
+              {{ form.submit(class="btn btn-outline-secondary") }}
+          </div>
+        </div>
+      </form>
+
+    {% for movie in movies %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ movie.genre }}</a>
+              <small class="text-muted">{{ movie.year }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ movie.name }}</a></h2>
+            <p class="article-content">{{ movie.production }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
